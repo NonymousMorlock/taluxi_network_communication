@@ -1,12 +1,10 @@
-import 'package:flutter/foundation.dart';
-
 class NotificationException implements Exception {
   final String message;
   final NotificationExceptionType exceptionType;
 
   const NotificationException({
-    @required this.exceptionType,
-    @required this.message,
+    required this.exceptionType,
+    required this.message,
   });
 
   const NotificationException.unknown()
