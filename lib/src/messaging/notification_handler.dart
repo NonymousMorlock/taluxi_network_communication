@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:network_communication/src/messaging/notification_exception.dart';
 import 'package:network_communication/src/messaging/on_signal_adapter.dart';
 
 /// A Notification Handler (Send & Receive)
@@ -56,12 +56,6 @@ class SilentNotificationReason {
 }
 
 class Notification {
-  final String title;
-  final String? subTitle;
-  final String body;
-  final List<NotificationActionButton>? actionButtons;
-  Map<String, dynamic>? additionalData;
-
   Notification({
     required this.title,
     required this.body,
@@ -69,6 +63,11 @@ class Notification {
     this.actionButtons,
     this.additionalData,
   });
+  final String title;
+  final String? subTitle;
+  final String body;
+  final List<NotificationActionButton>? actionButtons;
+  Map<String, dynamic>? additionalData;
 
   Map<String, dynamic> toMap() {
     final notificationMap = <String, dynamic>{
@@ -94,10 +93,6 @@ class Notification {
 }
 
 class NotificationActionButton {
-  final String id;
-  final String text;
-  final String iconFilenameOrUrl;
-
   const NotificationActionButton({
     required this.id,
     required this.text,
@@ -106,10 +101,13 @@ class NotificationActionButton {
 
   NotificationActionButton.fromMap(Map<String, String> buttonMap)
       : this(
-          id: buttonMap['id'] as String,
-          text: buttonMap['text'] as String,
-          iconFilenameOrUrl: buttonMap['icon'] as String,
+          id: buttonMap['id']!,
+          text: buttonMap['text']!,
+          iconFilenameOrUrl: buttonMap['icon']!,
         );
+  final String id;
+  final String text;
+  final String iconFilenameOrUrl;
 
   Map<String, String> toMap() => {
         'id': id,

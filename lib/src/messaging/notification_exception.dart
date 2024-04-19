@@ -1,7 +1,4 @@
 class NotificationException implements Exception {
-  final String message;
-  final NotificationExceptionType exceptionType;
-
   const NotificationException({
     required this.exceptionType,
     required this.message,
@@ -19,6 +16,8 @@ class NotificationException implements Exception {
           message:
               'The provided recipientId is not registred on the server. Provide subscribed recipient identifier.',
         );
+  final String message;
+  final NotificationExceptionType exceptionType;
 }
 
 enum NotificationExceptionType {

@@ -4,9 +4,6 @@ import 'package:mockito/mockito.dart';
 import 'package:network_communication/src/messaging/notification_handler.dart';
 
 class MockNotificationHandler extends Mock implements NotificationHandler {
-  static final _silentNotificationStreamController =
-      StreamController<Map<String, dynamic>>.broadcast();
-
   // static final _pushNotificationStreamController =
   //     StreamController<Notification>.broadcast();
 
@@ -17,8 +14,10 @@ class MockNotificationHandler extends Mock implements NotificationHandler {
       }
       ..onListen = () => silentNotificatiionListenerCount++;
   }
+  static final _silentNotificationStreamController =
+      StreamController<Map<String, dynamic>>.broadcast();
 
-  static var silentNotificatiionListenerCount = 0;
+  static int silentNotificatiionListenerCount = 0;
 
   @override
   // TODO: implement silentNotificationStream
@@ -32,27 +31,28 @@ class MockNotificationHandler extends Mock implements NotificationHandler {
   // }
 
   static void simulateReceivingSilentNotification(
-      Map<String, dynamic> notification) {
+    Map<String, dynamic> notification,
+  ) {
     _silentNotificationStreamController.add(notification);
   }
 }
 
 // @override
 // Future<void> sendIncomingCallNotification(String recipientId) {
-//   // TODO: implement sendIncomingCallNotification
+//   // `TODO`: implement sendIncomingCallNotification
 //   throw UnimplementedError();
 // }
 
 // @override
 // Future<void> sendPushNotification(
 //     {String recipientId, Notification notification}) {
-//   // TODO: implement sendPushNotification
+//   // `TODO`: implement sendPushNotification
 //   throw UnimplementedError();
 // }
 
 // @override
 // Future<void> sendSilentNotification(
 //     {String recipientId, Map<String, dynamic> data}) {
-//   // TODO: implement sendSilentNotification
+//   // `TODO`: implement sendSilentNotification
 //   throw UnimplementedError();
 // }

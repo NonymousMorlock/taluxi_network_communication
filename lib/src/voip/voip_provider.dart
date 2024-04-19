@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:network_communication/src/voip/agora_rtc_engine_adapter.dart';
+import 'package:network_communication/src/voip/voip_exception.dart';
 
 /// A Voice call provider.
 abstract class VoIPProvider {
@@ -9,7 +10,7 @@ abstract class VoIPProvider {
   Stream<VoIPConnectionState> get connectionStateStream;
 
   /// Returns the VoIPProvider singleton.
-  static VoIPProvider get instance => AgoraRtcEnginAdapter();
+  static VoIPProvider get instance => AgoraRtcEngineAdapter();
 
   /// Initializes all required resources.
   ///
@@ -62,12 +63,12 @@ abstract class VoIPProvider {
   /// - [onCallFailed]
   ///   - Will be called if the call failed.
   Future<void> makeCall({
-    @required String callId,
-    @required String recipientId,
-    @required VoidCallback onCallAccepted,
-    @required VoidCallback onCallRejected,
-    @required void Function(CallLeaveReason) onCallLeft,
-    @required void Function(CallFailureReason) onCallFailed,
+    required String callId,
+    required String recipientId,
+    required VoidCallback onCallAccepted,
+    required VoidCallback onCallRejected,
+    required void Function(CallLeaveReason) onCallLeft,
+    required void Function(CallFailureReason) onCallFailed,
     VoidCallback onCallSuccess,
     Duration responseTimeout = const Duration(seconds: 30),
   });
@@ -87,10 +88,10 @@ abstract class VoIPProvider {
   /// - [onFail]
   ///   - Will be called when accepting the call fails
   Future<void> acceptCall({
-    @required String callId,
-    @required void Function(CallLeaveReason) onCallLeft,
-    @required VoidCallback onCallAccepted,
-    @required void Function(CallFailureReason) onFail,
+    required String callId,
+    required void Function(CallLeaveReason) onCallLeft,
+    required VoidCallback onCallAccepted,
+    required void Function(CallFailureReason) onFail,
   });
 
   /// Rejects an incoming call
@@ -128,7 +129,7 @@ enum CallFailureReason {
   invalidCallId,
 
   /// When the fail reason is unknown
-  unknwon,
+  unknown,
 
   /// When the recipient's id isn't registered on the server
   unregisteredRecipientId
